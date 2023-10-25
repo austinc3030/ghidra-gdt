@@ -18,7 +18,7 @@ from ghidra.util.task import TaskMonitor
 # existing ghidra data type archive.
 gdt = askFile('GDT Archive File', 'OK')
 
-dtm = FileDataTypeManager.createFileArchive(gdt)
+dtm = FileDataTypeManager.openFileArchive(gdt, True)
 cmd = CaptureFunctionDataTypesCmd(dtm, currentProgram.getMemory(), None)
 cmd.applyTo(currentProgram, TaskMonitor.DUMMY)
 
