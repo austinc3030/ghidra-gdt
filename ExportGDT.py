@@ -9,17 +9,16 @@ from ghidra.util import Msg
 from ghidra.program.model.data import FileDataTypeManager
 from ghidra.app.script import GhidraScript
 from ghidra.app.cmd.function import CaptureFunctionDataTypesCmd
+from docking.widgets.filechooser import GhidraFileChooser
 from ghidra.util.task import TaskMonitor
-
-
 
 # For exporting a ghidra data type archive for the current program,
 # specify a new file that does not exist. For adding to an existing
 # ghidra data type archive (creating a library of sorts), specify an
 # existing ghidra data type archive.
-gdt = askFile('GDT Archive File', 'OK').path
+gdt = askFile('GDT Archive File', 'OK')
 
-if os.path.exists(gdt):
+if os.path.isfile(str(gdt)):
     dtm = FileDataTypeManager.openFileArchive(gdt, True)
 else:
     dtm = FileDataTypeManager.createFileArchive(gdt)
